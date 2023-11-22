@@ -5,9 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: [
-        // Add any other external modules if needed
-      ],
+      external: [],
       output: {
         assetFileNames: 'images/[name].[ext]',
       },
