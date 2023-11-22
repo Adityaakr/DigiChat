@@ -1,5 +1,4 @@
 import React from "react";
-import Work from "/home/aditya/Desktop/Chat App/youtube2022/src/img/Work.png"
 
 const Login = () => {
         return (
