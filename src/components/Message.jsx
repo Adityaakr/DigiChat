@@ -8,7 +8,7 @@ function Message(){
                         <span> Just Now</span>
                 </div>
                 <div className="messageContent">
-                 <img src= "/src/img/Video.png" alt="" />
+                 <img src= "Video.png" alt="" />
 
                  <p>hello</p>
                  </div>
