@@ -5,7 +5,6 @@ import Video from "/src/img/Video.png"
 import Messages from "./Messages.jsx";
 import Input from "./Input.jsx";
 
-//37.01 minutes over
 
 function Chat() {
         return(
