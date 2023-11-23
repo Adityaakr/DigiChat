@@ -4,7 +4,7 @@ function Message(){
         return(
            <div className="message owner">
                 <div className="messageInfo">
-                        <img src= "/src/img/add.png"/>
+                        <img src= "add.png"/>
                         <span> Just Now</span>
                 </div>
                 <div className="messageContent">
