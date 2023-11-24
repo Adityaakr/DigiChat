@@ -20,7 +20,7 @@ const Register = () => {
         </label>
         <button>Sign Up</button>
         </form>
-        <p>You already have an Account? Login</p>
+        <p>You already have an Account? <u>Login</u></p>
         
         </div>
     </div>
