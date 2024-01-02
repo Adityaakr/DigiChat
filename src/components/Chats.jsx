@@ -1,52 +1,51 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { collection, doc, onSnapshot } from "firebase/firestore";
+import { AuthContext } from "../Context/AuthContext.jsx";
+import { db } from "../firebase.js";
 
 function Chats() {
-        return(
-                <div className="chats">
-                <div className="userChat">
-               <img src="https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <div className="userChatInfo">
-                <span>You</span>
-                <p>Hello</p>
-                </div>
-                </div>
+  const [chats, setChats] = useState([]);
+  const { currentUser } = useContext(AuthContext);
 
-                <div className="userChat">
-               <img src="https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <div className="userChatInfo">
-                <span>You</span>
-                <p>Hello</p>
-                </div>
-                </div>
+  useEffect(() => {
+    // Ensure currentUser and db are defined before proceeding
+    if (!currentUser || !currentUser.uid || !db) return;
 
-                <div className="userChat">
-               <img src="https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <div className="userChatInfo">
-                <span>You</span>
-                <p>Hello</p>
-                </div>
-                </div>
+    const unsubscribe = onSnapshot(
+      doc(db, "userChats", currentUser.uid),
+      (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const userInfo = docSnapshot.data().userInfo;
+          if (userInfo) { // Handle potential missing userInfo
+            setChats(userInfo);
+          } else {
+            console.warn("userInfo field missing in userChats document");
+          }
+        } else {
+          setChats([]);
+        }
+      },
+      (error) => {
+        console.error("Error fetching chats:", error);
+      }
+    );
 
-                <div className="userChat">
-               <img src="https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <div className="userChatInfo">
-                <span>You</span>
-                <p>Hello</p>
-                </div>
-                </div>
-                
-                <div className="userChat">
-               <img src="https://images.pexels.com/photos/3094799/pexels-photo-3094799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <div className="userChatInfo">
-                <span>You</span>
-                <p>Hello</p>
-                </div>
-                </div>
-                        
+    return () => unsubscribe();
+  }, [currentUser.uid, db]); // Include db in dependencies
 
-                </div>
-
-        )
+  return (
+    <div className="chats">
+      {chats?.map((chat) => (
+        <div className="userChat" key={chat.id}>
+          <img src={chat.photoURL} alt="" />
+          <div className="userChatInfo">
+            <span>{chat.displayName}</span>
+            <p>{chat.lastMessage?.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default Chats;
