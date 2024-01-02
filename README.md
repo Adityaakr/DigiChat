@@ -42,7 +42,7 @@ DIGI-CHAT is designed with a user-friendly and intuitive interface, providing an
 
 To get started with DIGI-CHAT, follow these simple steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/digi-chat.git`
+1. Clone the repository: `https://github.com/Adityaakr/DigiChat.git`
 2. Install dependencies: `cd digi-chat && npm install`
 3. Configure Firebase: Set up your Firebase project and update the Firebase configuration in the code.
 4. Run the application: `npm run dev`
