@@ -3,7 +3,7 @@ import Register from "./Register.jsx";
 import "./Style.scss";
 import Login from "./Login.jsx";
 import Home from "./Home.jsx"
-import { AuthContext } from "./AuthContext.jsx";
+import { AuthContext } from "./AuthContext.jsx"
 import {
         BrowserRouter,
         Routes,
